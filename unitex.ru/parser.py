@@ -12,21 +12,22 @@ def get_html(url):
 
     req = requests.get(url=url, headers=headers)
     if req.status_code == 200:
-        print(req.status_code)
-        # return req.text
+        # print(req.status_code)
+        return req.text
     else:
         print('Страница не доступна')
 
 
 def get_categories(html):
     soup = bs(html, 'lxml')
-    categories_link = soup.find_all('div', class_ = 'Categorie')
-    print(categories_link)
+    categories_areas = soup.find('div', class_='right-bar').find_all('div', class_ = 'data')
+    # for
+    print(categories_areas[3])
 
 
 def main():
-    url = 'https://office-burg.ru/categories/'
-    print(get_html(url))
+    url = 'https://khanty-mansiysk.unitex.ru/office/'
+    get_categories(get_html(url))
 
 
 if __name__ == '__main__':
